@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Str;
-use App\Models\Project;
-use App\Models\TaskProgress;
 use App\Models\Member;
 
 class MemberController extends Controller
@@ -52,7 +48,7 @@ class MemberController extends Controller
     {
         $fields = $request->all();
         $errors = Validator::make($fields, [
-            'id' => 'required',
+            'id' => 'required|numeric',
             'name' => 'required',
             'email' => 'required',
 
