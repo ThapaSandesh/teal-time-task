@@ -10,4 +10,9 @@ class TaskMember extends Model
     use HasFactory;
     protected $guarded = [];
 
+    public function member()
+    {
+        return $this->hasOne(Member::class,'memberId');
+    }
+
 }

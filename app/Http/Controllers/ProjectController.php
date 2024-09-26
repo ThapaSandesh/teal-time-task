@@ -14,7 +14,7 @@ class ProjectController extends Controller
 {
     public function getProject(Request $request,$slug)
     {
-         $project = Project::with(['tasks.task_members'])
+         $project = Project::with(['tasks.task_members.member'])
          ->where('projects.slug',$slug)->first();
          return response(['data' => $project]);
     }
