@@ -13,4 +13,9 @@ class Task extends Model
     const COMPLETED=2;
     protected $guarded = [];
 
+    public function task_members()
+    {
+        return $this->hasMany(TaskMember::class,'taskId');
+    }
+
 }

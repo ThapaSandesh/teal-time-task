@@ -42,7 +42,6 @@ class TaskController extends Controller
                 'taskId' => $task->id,
                 'memberId' => $members[$i]
             ]);
-
         }
 
         return response(['message'=>'Task created successfully !']);

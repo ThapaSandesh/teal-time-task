@@ -12,6 +12,12 @@ use App\Models\TaskProgress;
 use App\Events\NewUserCreated;
 class ProjectController extends Controller
 {
+    public function getProject(Request $request,$slug)
+    {
+         $project = Project::with(['tasks.task_members'])
+         ->where('projects.slug',$slug)->first();
+         return response(['data' => $project]);
+    }
     public function index(Request $request)
     {
         $query = $request->get('query');

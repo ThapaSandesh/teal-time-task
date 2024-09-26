@@ -19,6 +19,8 @@ Route::controller(ProjectController::class)->group(function(){
     Route::put('/projects', 'update');
     Route::get('/projects','index');
     Route::post('/projects/pinned', 'pinnedProject');
+    Route::get('/projects/{slug}','getProject');
+
 });
 
 Route::controller(MemberController::class)->group(function(){
