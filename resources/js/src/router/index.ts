@@ -5,8 +5,8 @@ const router = createRouter({
     history: createWebHistory("/app"),
     routes: [
         {
-            path: "/register",
-            name: "register",
+            path: "/auth",
+            name: "auth",
             component: () => import("../pages/auth/AuthPage.vue"),
             children: [
                 {

@@ -1,5 +1,6 @@
 <template>
-    <div class="row">
+    <div class="container registerForm">
+        <div class="row">
         <div class="row">
             <div class="col-md-4">
 
@@ -21,7 +22,7 @@
                                 <input type="text" class="form-control" placeholder="">
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-primary">Register</button>
+                                <button class="btn btn-primary mt-3">Register</button>
                             </div>
                         </form>
                     </div>
@@ -29,4 +30,7 @@
             </div>
         </div>
     </div>
+    </div>
+
 </template>
+
