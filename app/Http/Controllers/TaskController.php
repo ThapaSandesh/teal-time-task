@@ -43,13 +43,42 @@ class TaskController extends Controller
                 'memberId' => $members[$i]
             ]);
         }
-
         return response(['message'=>'Task created successfully !']);
      });
-
-
     }
 
+    public function TaskNotStartedToPending(Request $request)
+    {
+        Task::changeTaskStatus($request->taskId,Task::PENDING);
+        return response(['message'=> 'task moved to pending'],200);
+    }
+    public function TaskNotStartedToCompleted(Request $request)
+    {
+        Task::changeTaskStatus($request->taskId,Task::COMPLETED);
+        return response(['message'=> 'task moved to completed'],200);
+    }
+    public function TaskPendingToCompleted(Request $request)
+    {
+        Task::changeTaskStatus($request->taskId,Task::COMPLETED);
+        return response(['message'=> 'task moved to completed'],200);
+    }
+    public function TaskPendingToNotStarted(Request $request)
+    {
+        Task::changeTaskStatus($request->taskId,Task::NOT_STARTED);
+        return response(['message'=> 'task moved to not started'],200);
+    }
+    public function TaskCompletedToPending(Request $request)
+    {
+
+        Task::changeTaskStatus($request->taskId,Task::PENDING);
+        return response(['message'=> 'task moved to not pending'],200);
+    }
+    public function TaskCompletedToNotStarted(Request $request)
+    {
+        Task::changeTaskStatus($request->taskId,Task::NOT_STARTED);
+        return response(['message'=> 'task moved to not started'],200);
+    }
+    
 
 
 }
