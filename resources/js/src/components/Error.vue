@@ -9,6 +9,7 @@ const props = defineProps<{
 <template>
     <label for="">{{props.label}}</label>
     <div :class="{ error: props.errors.length }">
+        <!-- slot for adding input fields here -->
         <slot></slot>
         <div
             class="input-errors"
