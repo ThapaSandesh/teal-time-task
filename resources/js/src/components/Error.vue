@@ -2,15 +2,14 @@
 import { ErrorObject } from "@vuelidate/core";
 
 const props = defineProps<{
+    label:string
     errors: ErrorObject[];
 }>();
 </script>
-
 <template>
-    <label for="">E-mail</label>
-
+    <label for="">{{props.label}}</label>
     <div :class="{ error: props.errors.length }">
-
+        <slot></slot>
         <div
             class="input-errors"
             v-for="error of props.errors"
@@ -20,8 +19,8 @@ const props = defineProps<{
         </div>
     </div>
 </template>
-<style>
-    .input-errors {
-        color: red;
-    }
+<style scoped>
+.input-errors{
+    color:red;
+}
 </style>

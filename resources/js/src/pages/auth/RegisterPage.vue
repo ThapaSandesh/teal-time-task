@@ -34,12 +34,7 @@ async function submitRegister() {
 
                             <form @submit.prevent="submitRegister">
                                 <div class="form-group">
-                                    <label for="">Email</label>
-                                    <div
-                                        :class="{
-                                            error: v$.email.$errors.length,
-                                        }"
-                                    >
+                                        <Error label="E-mail":errors="v$.email.$errors">
                                         <input
                                             v-model="registerInput.email"
                                             type="email"
@@ -47,41 +42,20 @@ async function submitRegister() {
                                             class="form-control"
                                             placeholder=""
                                         />
-                                        <div
-                                            class="input-errors"
-                                            v-for="error of v$.email.$errors"
-                                            :key="error.$uid"
-                                        >
-                                            <div class="error-msg">
-                                                {{ error.$message }}
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </Error>
+
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Password</label>
-                                    <div
-                                        :class="{
-                                            error: v$.password.$errors.length,
-                                        }"
-                                    >
-                                        <input
+                                        <Error label="Password" :errors="v$.password.$errors">
+                                            <input
                                             v-model="registerInput.password"
                                             type="password"
                                             autocomplete="off"
                                             class="form-control"
                                             placeholder=""
                                         />
-                                        <div
-                                            class="input-errors"
-                                            v-for="error of v$.password.$errors"
-                                            :key="error.$uid"
-                                        >
-                                            <div class="error-msg">
-                                                {{ error.$message }}
-                                            </div>
-                                        </div>
-                                    </div>
+                                        </Error>
+
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-primary mt-3">
