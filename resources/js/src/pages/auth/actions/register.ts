@@ -23,14 +23,20 @@ export function useRegisterUser(){
             const data = await makeHttpReq<RegisterUserType,RegisterResponseType> //calls the makeHttpReq function to send a post request to the register endpoint passing the data from registerInput.value
             ('register','POST',registerInput.value)
             loading.value = false;
+            registerInput.value={} as RegisterUserType
             successMsg(data.message);
         }catch(error) //handles the error that occurs when processing
         {
-           showError((error as Error).message);
+            loading.value = false;
+            for(const message of error as string[]){
+                showError(message);
+            }
+          
         }
 
 
     }
+    return {register,loading}
 }
 
 

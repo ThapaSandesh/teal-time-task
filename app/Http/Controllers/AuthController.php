@@ -38,7 +38,7 @@ class AuthController extends Controller
     public function validEmail($token)
     {
         User::where('remember_token', $token)->update(['isValidEmail' => User::IS_VALID_EMAIL]);
-        return redirect('/login');
+        return redirect('/app/login');
     }
 
     public function login(Request $request)
@@ -56,19 +56,25 @@ class AuthController extends Controller
         if (!is_null($user)) {
             if (intval($user->isValidEmail) !== User::IS_VALID_EMAIL) {
                 NewUserCreated::dispatch($user);
-                return response(['message' => 'Email Not Verified Yet. We have resend the verification email please check your email' . $user->email]);
+                return response([
+                    'message' => 'Email Not Verified Yet. We have resend the verification email please check your email' . $user->email,
+                    'isLoggedIn' => false,
+                ],422);
             }
         }
 
         if (!$user || !Hash::check($fields['password'],$user->password)) {
-            return response(['message' => 'email or password invalid'], 422);
+            return response([
+                'message' => 'email or password invalid',
+                'isLoggedIn' => false,
+            ], 422);
         }
         // dd($user);
         $token = $user->createToken($this->secretKey)->plainTextToken;
         return response(
             [
                 'user' => $user,
-                'message' => 'loggedin',
+                'message' => 'Loggedin Successfully',
                 'token' => $token,
                 'isLoggedIn' => true,
             ],
