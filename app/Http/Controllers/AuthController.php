@@ -18,7 +18,7 @@ class AuthController extends Controller
         $fields = $request->all();
         $errors = Validator::make($fields, [
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|max:8',
+            'password' => 'required|min:4|max:16',
         ]);
         if ($errors->fails()) {
             return response($errors->errors()->all(), 422);
@@ -32,7 +32,7 @@ class AuthController extends Controller
         ]);
         // dd($user);
         NewUserCreated::dispatch($user);
-        return response(['user' => $user, 'message' => 'user created'], 200);
+        return response(['user' => $user, 'message' => 'user created successfully'], 200);
     }
 
     public function validEmail($token)

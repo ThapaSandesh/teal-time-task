@@ -7,14 +7,12 @@ export type LoginUserType = { //A typescript type that defines the structure of 
     email : string;
     password : string;
 }
-
 export type LoginResponseType = { //a typescript type that defines the structure of the response from the server after the registration attempt.
     user:{email:string,id:string}, //an object containing the user's email
     message:string //a string message from the server
     isLoggedIn:boolean
     token:string
 }
-
 export const loginInput = ref<LoginUserType>({} as LoginUserType) //loginInput is a reactive variable that holds the registration input data i.e (email and password) entered by the user.
 
 export function useLoginUser(){
@@ -31,16 +29,14 @@ export function useLoginUser(){
 
             if (data.isLoggedIn) {
                 localStorage.setItem('userData',JSON.stringify(data))
-                window.location.href="/app/dashboard"
+                window.location.href="/app/admin"
             }
         }catch(error) //handles the error that occurs when processing
         {
             loading.value = false;
             ShowErrorResponse(error);
-          
+
         }
-
-
     }
     return {login,loading}
 }

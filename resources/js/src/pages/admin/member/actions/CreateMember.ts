@@ -3,7 +3,7 @@ import { makeHttpReq } from "../../../../helper/makeHttpReq";
 import { showError, successMsg } from "../../../../helper/toast-notification";
 import { ShowErrorResponse } from "../../../../helper/util";
 
-export type MemberInputType = { //A typescript type that defines the structure of the data needed to register a user.in this case email and password
+export type MemberInputType = { //A typescript type that defines the structure of the data needed to register a member.in this case email and name
     name : string,
     email : string;
 }
@@ -29,10 +29,8 @@ export function useCreateOrUpdateMember(){
         {
             loading.value = false;
             ShowErrorResponse(error)
-          
+
         }
-
-
     }
     return {createOrUpdate,loading}
 }
