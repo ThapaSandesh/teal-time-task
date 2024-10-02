@@ -11,15 +11,19 @@ class MemberController extends Controller
 {
     public function index(Request $request)
     {
-        $query = $request->get('query');
-        $members = DB::table('members');
-        if (!is_null($query) && $query !== '') {
-            $members->where('name', 'like', '%' . $query . '%')
-                ->orderBy('id', 'desc');
-            return response(['data' => $members->paginate(10)], 200);
-        }
-        return response(['data' => $members], 200);
+        $query=$request->get('query');
+        // $members=Member::select('name','email');
 
+       $members= DB::table('members');
+
+        if(!is_null($query)  && $query!==''){
+            $members->where('name','like','%' . $query.'%')
+            ->orderBy('id','desc');
+
+            return response(['data'=>$members->paginate(3)],200);
+
+        }
+        return response(['data'=>$members->paginate(3)],200);
     }
     public function store(Request $request)
     {
@@ -28,7 +32,6 @@ class MemberController extends Controller
             $errors = Validator::make($fields, [
                 'name' => 'required',
                 'email' => 'required|email',
-
             ]);
 
             if ($errors->fails()) {

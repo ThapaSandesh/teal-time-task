@@ -20,13 +20,13 @@ const v$ = useVuelidate(rules, memberInput);
 const { loading, createOrUpdate } = useCreateOrUpdateMember();
 
 
-// async function submitLogin() {
-//     const result = await v$.value.$validate();
-//     if (!result) return;
-//     await login();
-//     v$.value.$reset();
-//     // await register();
-// }
+async function submitMember() {
+    const result = await v$.value.$validate();
+    if (!result) return;
+    await createOrUpdate();
+    v$.value.$reset();
+    // await register();
+}
 </script>
 
 <template>
@@ -34,20 +34,23 @@ const { loading, createOrUpdate } = useCreateOrUpdateMember();
     <div class="row">
         <div class="col-md-6">
             <h1>Create Member</h1>
-            <form @submit.prevent="createOrUpdate">
+            <form @submit.prevent="submitMember">
                 <div class="form-group">
                     <Error label="Name" :errors="v$.name.$errors">
-                    
+
                     <BaseInput v-model="memberInput.name" />
                 </Error>
 
             </div>
                 <div class="form-group">
                     <Error label="E-mail" :errors="v$.email.$errors">
-                    
+
                     <BaseInput v-model="memberInput.email" />
                 </Error>
 
+            </div>
+            <div class="mt-2">
+                <router-link to="/members">see all members</router-link>
             </div>
             <div class="form-group mt-3">
                 <BaseBtn label="Create Member" :loading="loading"/>
