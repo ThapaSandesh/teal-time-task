@@ -20,10 +20,10 @@ class MemberController extends Controller
             $members->where('name','like','%' . $query.'%')
             ->orderBy('id','desc');
 
-            return response(['data'=>$members->paginate(3)],200);
+            return response(['data'=>$members->paginate(10)],200);
 
         }
-        return response(['data'=>$members->paginate(3)],200);
+        return response(['data'=>$members->paginate(10)],200);
     }
     public function store(Request $request)
     {
@@ -41,7 +41,6 @@ class MemberController extends Controller
             $member = Member::create([
                 'name' => $fields['name'],
                 'email' => $fields['email'],
-
             ]);
             return response(['message' => 'member created'], 200);
         });
