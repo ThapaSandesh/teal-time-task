@@ -21,7 +21,7 @@ export function useGetMembers(){
        try {
         loading.value = true
         const data= await makeHttpReq<undefined,GetMemberType>
-        ('members','GET')
+        (`members?query=${query}&page=${page}`,'GET')
         loading.value = false
         memberData.value = data
 
