@@ -1,5 +1,16 @@
 <script lang="ts" setup>
+import { useGetMembers } from './actions/GetMember';
 import MemberTable from './component/MemberTable.vue';
+import { onMounted } from 'vue';
+
+const{getMembers,memberData,loading} = useGetMembers();
+async function showListOfMembers(){
+    await getMembers();
+}
+onMounted(async () => {
+    showListOfMembers();
+});
+
 
 </script>
 
@@ -12,7 +23,7 @@ import MemberTable from './component/MemberTable.vue';
                         <router-link style="float: right;" to="/create-members" class="btn btn-primary">Create Member</router-link>
                     </div>
                     <div class="card-body">
-                        <MemberTable />
+                        <MemberTable :members="memberData"/>
                     </div>
                 </div>
             </div>

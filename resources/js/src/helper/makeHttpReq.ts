@@ -5,7 +5,7 @@ type HttpVerbType = "GET" | "POST" | "PUT" | "DELETE";
 export function makeHttpReq<TInput, TResponse>(
     endpoint: string,
     verb: HttpVerbType,
-    input?: TInput
+    input?: TInput  //in case of blank input can be used for GET requests where no input is provided
 ) {
     return new Promise<TResponse>(async (resolve, reject) => {
         try {

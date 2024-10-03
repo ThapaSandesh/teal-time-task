@@ -8,12 +8,12 @@ import NavBar from './components/NavBar.vue'
 
 <template>
     <div class="container">
-    
+
       <div class="container-fluid">
       <div class="row">
-      
+
         <NavBar  @logout="logoutUser" />
-  
+
         <main class="col-md-9 ms-sm-auto col-lg-10  bg-pages">
           <br /><br />
           <router-view v-slot="{ Component, route }">
@@ -26,10 +26,10 @@ import NavBar from './components/NavBar.vue'
         </main>
       </div>
     </div>
-  
+
     </div>
   </template>
-  
+
   <style>
   .fade-enter-active,
   .fade-leave-active {
@@ -37,22 +37,22 @@ import NavBar from './components/NavBar.vue'
     transition-property: opacity;
     transition-timing-function: ease;
   }
-  
+
   .fade-enter,
   .fade-leave-active {
     opacity: 0;
   }
-  
+
   /* input errors  */
-  
-  
+
+
   .navbar-nav .nav-item img {
     padding: 10px;
     border-radius: 25px;
     position: relative;
     right: 20px;
   }
-  
+
   .nav-link {
     display: block;
     padding: 0.5rem 1rem;
@@ -61,17 +61,17 @@ import NavBar from './components/NavBar.vue'
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
       border-color 0.15s ease-in-out;
   }
-  
+
   body {
     font-size: 0.875rem;
   }
-  
+
   .feather {
     width: 16px;
     height: 16px;
     vertical-align: text-bottom;
   }
-  
+
   .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -79,17 +79,17 @@ import NavBar from './components/NavBar.vue'
     -moz-user-select: none;
     user-select: none;
   }
-  
+
   @media (min-width: 768px) {
     .bd-placeholder-img-lg {
       font-size: 3.5rem;
     }
   }
-  
+
   /*
    * Sidebar
    */
-  
+
   .sidebar {
     position: fixed;
     top: 0;
@@ -99,13 +99,13 @@ import NavBar from './components/NavBar.vue'
     padding: 48px 0 0;
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
   }
-  
+
   @media (max-width: 767.98px) {
     .sidebar {
       top: 5rem;
     }
   }
-  
+
   .sidebar-sticky {
     position: relative;
     top: 0;
@@ -115,35 +115,35 @@ import NavBar from './components/NavBar.vue'
     overflow-y: auto;
     /* Scrollable contents if viewport is shorter than content. */
   }
-  
+
   .sidebar .nav-link {
     font-weight: 500;
     color: #333;
   }
-  
+
   .sidebar .nav-link .feather {
     margin-right: 4px;
     color: #727272;
   }
-  
+
   .sidebar .nav-link.active {
     color: #2470dc;
   }
-  
+
   .sidebar .nav-link:hover .feather,
   .sidebar .nav-link.active .feather {
     color: inherit;
   }
-  
+
   .sidebar-heading {
     font-size: 0.75rem;
     text-transform: uppercase;
   }
-  
+
   /*
    * Navbar
    */
-  
+
   .navbar-brand {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
@@ -151,18 +151,18 @@ import NavBar from './components/NavBar.vue'
     background-color: rgba(0, 0, 0, 0.25);
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
   }
-  
+
   .navbar .navbar-toggler {
     top: 0.25rem;
     right: 1rem;
   }
-  
+
   .form-control-dark {
     color: #fff;
     background-color: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.1);
   }
-  
+
   .form-control-dark:focus {
     border-color: transparent;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);

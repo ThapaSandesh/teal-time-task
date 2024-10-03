@@ -1,20 +1,23 @@
 <script lang="ts" setup>
+import { GetMemberType } from '../actions/GetMember';
 
-
+defineProps<{
+    members:GetMemberType
+}>()
 </script>
 
 
 <template>
    <table class="table table-bordered table-hover">
         <tr>
-            <td>Id</td>
-            <td>Name</td>
-            <td>Email</td>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
         </tr>
-        <tr>
-            <td>#1</td>
-            <td>Ben</td>
-            <td>Ben@gmail.com</td>
+         <tr v-for="member in members?.data?.data" :key="member.id">
+            <td>{{ member.id }}</td>
+            <td>{{ member.name }}</td>
+            <td>{{ member.email }}</td>
         </tr>
    </table>
 </template>
