@@ -76,5 +76,6 @@ const search = myDebounce(async function () {
 
 
    </table>
+   <slot name="pagination"></slot>
   </div>
 </template>
