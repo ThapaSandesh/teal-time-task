@@ -14,6 +14,8 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login');
 });
 
+Route::group(['middleware'=>['auth:sanctum']],function(){
+
 Route::controller(ProjectController::class)->group(function(){
     Route::post('/projects','store');
     Route::put('/projects', 'update');
@@ -38,6 +40,8 @@ Route::controller(TaskController::class)->group(function(){
     Route::post('/tasks/pending_to_not_started','TaskPendingToNotStarted');
     Route::post('/tasks/completed_to_pending','TaskCompletedToPending');
     Route::post('/tasks/completed_to_not_started','TaskCompletedToNotStarted');
+});
+
 });
 
 

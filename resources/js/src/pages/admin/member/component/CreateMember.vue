@@ -7,8 +7,7 @@ import BaseInput from "../../../../components/BaseInput.vue";
 import BaseBtn from "../../../../components/BaseBtn.vue";
 
 
-
-import { memberInput, useCreateOrUpdateMember } from "../actions/CreateMember";
+import { memberStore, useCreateOrUpdateMember } from "../actions/CreateMember";
 
 
 const rules = {
@@ -16,7 +15,7 @@ const rules = {
     name: { required }, // Matches state.lastName
 };
 
-const v$ = useVuelidate(rules, memberInput);
+const v$ = useVuelidate(rules, memberStore.memberInput);
 const { loading, createOrUpdate } = useCreateOrUpdateMember();
 
 
@@ -33,19 +32,18 @@ async function submitMember() {
   <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <h1>Create Member</h1>
+            <h1>{{memberStore.edit?'Update Member':'Create Member'}}</h1>
+
             <form @submit.prevent="submitMember">
                 <div class="form-group">
                     <Error label="Name" :errors="v$.name.$errors">
-
-                    <BaseInput v-model="memberInput.name" />
+                    <BaseInput v-model="memberStore.memberInput.name" />
                 </Error>
 
             </div>
                 <div class="form-group">
                     <Error label="E-mail" :errors="v$.email.$errors">
-
-                    <BaseInput v-model="memberInput.email" />
+                    <BaseInput v-model="memberStore.memberInput.email" />
                 </Error>
 
             </div>
@@ -53,7 +51,10 @@ async function submitMember() {
                 <router-link to="/members">see all members</router-link>
             </div>
             <div class="form-group mt-3">
-                <BaseBtn label="Create Member" :loading="loading"/>
+                <BaseBtn
+                :class="memberStore.edit ? 'btn btn-warning':'btn btn-primary'"
+                :label="memberStore.edit ? 'Update Member' : 'Create Member'"
+                :loading="loading"/>
              </div>
             </form>
         </div>

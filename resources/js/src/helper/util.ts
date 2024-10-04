@@ -11,12 +11,13 @@ export function ShowErrorResponse(error:unknown){
     }
 }
 
-export function myDebounce<T>(func:()=> Promise<T>,delay:number) //the function is only called after a specified delay has passed
-{
+export function myDebounce<T>(func:(args?:any)=>Promise<T>,delay:number){
+
     let timer:any;
+
     return function(){
         clearTimeout(timer);
-        setTimeout(() =>func(),delay);
+        timer=setTimeout(()=>func(),delay);
     }
 }
 

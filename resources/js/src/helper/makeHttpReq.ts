@@ -1,4 +1,5 @@
 import { APP } from "./../App/APP";
+import { getUserData } from "./getUserData";
 
 type HttpVerbType = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -9,10 +10,12 @@ export function makeHttpReq<TInput, TResponse>(
 ) {
     return new Promise<TResponse>(async (resolve, reject) => {
         try {
+            const userData = getUserData()
             const res = await fetch(`${APP.apiBaseURL}/${endpoint}`,{
                 method:verb,
                 headers:{
                     "content-type": "application/json",
+                    Authorization: "Bearer "+userData?.token
                 },
                 body: JSON.stringify(input)
             });

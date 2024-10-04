@@ -64,6 +64,6 @@ class MemberController extends Controller
             'email' => $fields['email'],
         ]);
 
-        return response(['message' => 'member updated'], 200);
+        return response(['message' => 'member updated successfully'], 200);
     }
 }
