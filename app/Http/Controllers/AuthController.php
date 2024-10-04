@@ -82,6 +82,15 @@ class AuthController extends Controller
         );
     }
 
+    public function logoutUser(Request $request)
+    {
+        DB::table('personal_access_tokens')
+        ->where('tokenable_id',$request->id)
+        ->delete();
+
+        return response(['message' => 'Logged Out Successfully'],200);
+    }
+
 
     function generateRandomCode()
     {

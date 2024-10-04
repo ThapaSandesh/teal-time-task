@@ -1,7 +1,18 @@
 <script lang="ts" setup>
+import { getUserData } from '../../helper/getUserData';
+import { useLogoutUser } from './actions/Logout';
 import NavBar from './components/NavBar.vue'
-    function logoutUser(){
-        console.log("logout")
+
+const {logout} = useLogoutUser()
+const userData = getUserData()
+    async function logoutUser(){
+        const userId=userData?.user?.id
+        if (typeof userId !=='undefined') {
+            await logout(userId)
+            localStorage.clear()
+            setTimeout(()=> window.location.href="/app/login",1000)
+
+        }
     }
 </script>
 
@@ -12,7 +23,7 @@ import NavBar from './components/NavBar.vue'
       <div class="container-fluid">
       <div class="row">
 
-        <NavBar  @logout="logoutUser" />
+        <NavBar :loggedInUserEmail="userData?.user.email"  @logout="logoutUser" />
 
         <main class="col-md-9 ms-sm-auto col-lg-10  bg-pages">
           <br /><br />

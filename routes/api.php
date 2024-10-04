@@ -16,6 +16,12 @@ Route::controller(AuthController::class)->group(function(){
 
 Route::group(['middleware'=>['auth:sanctum']],function(){
 
+
+    Route::controller(AuthController::class)->group(function(){
+        Route::post('/logout', 'logoutUser');
+
+    });
+
 Route::controller(ProjectController::class)->group(function(){
     Route::post('/projects','store');
     Route::put('/projects', 'update');
