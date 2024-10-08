@@ -22,14 +22,15 @@ class ProjectController extends Controller
     {
         $query = $request->get('query');
         $projects = Project::with(['task_progress']);
-        if(!is_null($query) && $query!=='')
-        {
-            $projects->where('name','like','%'. $query . '%')
-            ->orderBy('id', 'desc');
-            return response(['data' => $projects->paginate(10)],200);
-        }
-        return response(['data' => $projects],200);
 
+        if (!is_null($query) && $query !== '') {
+            $projects->where('name', 'like', '%' . $query . '%');
+        }
+
+        // Run the query with pagination regardless of whether the query is present or not
+        $projectsPaginated = $projects->orderBy('id', 'desc')->paginate(5);
+
+        return response(['data' => $projectsPaginated], 200);
     }
     public function store(Request $request)
     {
@@ -56,7 +57,7 @@ class ProjectController extends Controller
 
             TaskProgress::create([
                 'projectId' => $project->id,
-                'pinned_on_dashboard' => TaskProgress::NOT_PINNED_ON_DASHBOARD,
+                'pinned_on_dashbaord' => TaskProgress::NOT_PINNED_ON_DASHBOARD,
                 'progress' => TaskProgress::INITIAL_PROJECT_PERCENT,
             ]);
 

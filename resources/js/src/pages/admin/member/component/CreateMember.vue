@@ -2,11 +2,6 @@
 import { useVuelidate } from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
 
-import Error from "../../../../components/Error.vue";
-import BaseInput from "../../../../components/BaseInput.vue";
-import BaseBtn from "../../../../components/BaseBtn.vue";
-
-
 import { memberStore, useCreateOrUpdateMember } from "../actions/CreateMember";
 
 

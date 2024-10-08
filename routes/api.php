@@ -14,7 +14,7 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login');
 });
 
-Route::group(['middleware'=>['auth:sanctum']],function(){
+// Route::group(['middleware'=>['auth:sanctum']],function(){
 
 
     Route::controller(AuthController::class)->group(function(){
@@ -48,7 +48,7 @@ Route::controller(TaskController::class)->group(function(){
     Route::post('/tasks/completed_to_not_started','TaskCompletedToNotStarted');
 });
 
-});
+// });
 
 
 

@@ -6,10 +6,19 @@ import ToastPlugin from 'vue-toast-notification';
 import { Bootstrap5Pagination } from "laravel-vue-pagination";
 import 'vue-toast-notification/dist/theme-bootstrap.css';
 import { createPinia } from 'pinia';
+import Error from './src/components/Error.vue';
+import BaseBtn from './src/components/BaseBtn.vue';
+import BaseInput from './src/components/BaseInput.vue';
+
+
+
 
 createApp(App)
 .use(router)
 .use(ToastPlugin)
 .use(createPinia())
+.component('Error', Error)
+.component('BaseBtn', BaseBtn)
+.component('BaseInput', BaseInput)
 .component('Bootstrap5Pagination',Bootstrap5Pagination)
 .mount("#app")

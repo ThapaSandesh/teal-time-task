@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { onMounted } from 'vue';
 import { getUserData } from '../../helper/getUserData';
 import { useLogoutUser } from './actions/Logout';
 import NavBar from './components/NavBar.vue'
@@ -11,10 +12,17 @@ const userData = getUserData()
             await logout(userId)
             localStorage.clear()
             setTimeout(()=> window.location.href="/app/login",1000)
-
         }
     }
+    async function tryLogoutUser(){
+  await logout(undefined)
+}
+
+onMounted(async ()=>{
+await tryLogoutUser()
+})
 </script>
+
 
 
 <template>

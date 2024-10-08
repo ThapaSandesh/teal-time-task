@@ -1,9 +1,6 @@
 <script lang="ts" setup>
 import { useVuelidate } from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
-import Error from "../../components/Error.vue";
-import BaseInput from "../../components/BaseInput.vue";
-import BaseBtn from "../../components/BaseBtn.vue";
 import { loginInput, useLoginUser } from "./actions/login";
 
 
@@ -38,17 +35,17 @@ async function submitLogin() {
                             <br />
                             <!-- {{ loginInput }} -->
                             <form @submit.prevent="submitLogin">
-                               
+
                                 <div class="form-group">
                                         <Error label="E-mail" :errors="v$.email.$errors">
-                                        
+
                                         <BaseInput v-model="loginInput.email" />
                                     </Error>
 
                                 </div>
                                 <div class="form-group">
                                         <Error label="Password" :errors="v$.password.$errors">
-                                           
+
                                         <BaseInput
                                         type="password"
                                         v-model="loginInput.password" />
