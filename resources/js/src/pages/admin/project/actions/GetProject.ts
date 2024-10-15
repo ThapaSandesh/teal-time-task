@@ -3,12 +3,20 @@ import { makeHttpReq } from "../../../../helper/makeHttpReq"
 import { ShowErrorResponse } from "../../../../helper/util"
 
 
-export type ProjectType={
-    id:number
-    name:string
-    startDate:string
-    endDate:string
-}
+export type ProjectType = {
+    id: number;
+    name: string;
+    startDate: string;
+    endDate: string;
+    slug: string;
+    task_progress: {
+        id: number;
+        projectId: number
+        progress: string
+        created_at: string
+        updated_at: string
+    };
+};
 
 export type GetProjectType={
     data:{data:Array<ProjectType>}

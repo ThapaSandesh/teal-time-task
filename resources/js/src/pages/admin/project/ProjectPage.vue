@@ -8,6 +8,7 @@ import { ProjectType, useGetProjects } from './actions/GetProject';
 import { projectStore } from './store/projectStore';
 import { ProjectInputType } from './actions/CreateProject';
 import ProjectTable from './component/ProjectTable.vue';
+import { usePinnedProject } from './actions/PinnedProject';
 const{getProjects,projectData,loading} = useGetProjects();
 async function showListOfProjects(){
     await getProjects();
@@ -18,6 +19,13 @@ function editProject(project:ProjectType){
     projectStore.edit = true;
     router.push('/create-projects');
 }
+const {pinnedProject} = usePinnedProject()
+async function pinnedProjectOnDashboard(projectId:number)
+{
+    await pinnedProject(projectId);
+    router.push('/admin');
+}
+
 onMounted(async () => {
     showListOfProjects();
     projectStore.edit = false;
@@ -40,6 +48,7 @@ onMounted(async () => {
                         :loading="loading"
                         @getProject="getProjects"
                         :projects="projectData"
+                        @pinnedProject="pinnedProjectOnDashboard"
                         >
                         <template #pagination>
                                 <Bootstrap5Pagination

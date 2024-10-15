@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewProjectCreated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +29,7 @@ class ProjectController extends Controller
         }
 
         // Run the query with pagination regardless of whether the query is present or not
-        $projectsPaginated = $projects->orderBy('id', 'desc')->paginate(5);
+        $projectsPaginated = $projects->orderBy('id', 'asc')->paginate(5);
 
         return response(['data' => $projectsPaginated], 200);
     }
@@ -61,6 +62,9 @@ class ProjectController extends Controller
                 'progress' => TaskProgress::INITIAL_PROJECT_PERCENT,
             ]);
 
+            $count = Project::count();
+            NewProjectCreated::dispatch($count);
+
             return response(['message' => 'project created'], 200);
         });
     }
@@ -89,24 +93,49 @@ class ProjectController extends Controller
     }
     public function pinnedProject(Request $request)
     {
-        $fields = $request->all();
+
+        return DB::transaction(function () use ($request) {
+
+
+            $fields = $request->all();
+
             $errors = Validator::make($fields, [
                 'projectId' => 'required|numeric',
+
             ]);
 
             if ($errors->fails()) {
                 return response($errors->errors()->all(), 422);
             }
-            TaskProgress::where('projectId',$fields['projectId'])
-            ->update([
-                'pinned_on_dashboard'=>TaskProgress::PINNED_ON_DASHBOARD
-            ]);
-            return response(['message' => 'project pinned on dashboard']);
+            TaskProgress::where('pinned_on_dashbaord', TaskProgress::PINNED_ON_DASHBOARD)
+                ->update(['pinned_on_dashbaord' => TaskProgress::NOT_PINNED_ON_DASHBOARD]);
+
+            TaskProgress::where('projectId', $fields['projectId'])
+                ->update([
+                    'pinned_on_dashbaord' => TaskProgress::PINNED_ON_DASHBOARD
+                ]);
+            return response(['message' => 'project pinned on dashboard !']);
+        });
     }
+
 
     public function countProject()
     {
         $count = Project::count();
-        return response(['data' => $count]);
+        return response(['count' => $count]);
+    }
+
+    public function getPinnedProject(Request $request)
+    {
+        $Project=DB::table('task_progress')
+        ->join('projects','task_progress.projectId', '=','projects.id')
+        ->select('projects.id','projects.name')
+        ->where('task_progress.pinned_on_dashbaord',TaskProgress::PINNED_ON_DASHBOARD)
+        ->first();
+
+        if(!is_null($Project)){
+            return response(['data'=>$Project]);
+        }
+        return response(['data'=>null]);
     }
 }

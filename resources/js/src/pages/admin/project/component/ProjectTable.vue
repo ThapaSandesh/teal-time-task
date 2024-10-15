@@ -12,8 +12,10 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-    (e: "editProject", project: ProjectType): void;
-    (e: "getProject", page: number, query: string): Promise<void>;
+    (e:'pinnedProject',projectId:number):void
+    (e:'editProject',project:ProjectType):void
+    (e:'viewProjectDetail',projectId:number):void
+    (e:'getProject',page:number,query:string):Promise<void>
 }>();
 //defineEmits is used to declare the custom events that this child can emit events like button clicked etc
 
@@ -62,8 +64,6 @@ const search = myDebounce(async function () {
                 <td>{{ project.id }}</td>
                 <td>{{ project.name }}</td>
                 <td>
-
-
                     <div
                     class="progress"
                     role="progressbar"
