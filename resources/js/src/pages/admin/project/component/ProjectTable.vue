@@ -13,6 +13,7 @@ defineProps<{
 
 const emit = defineEmits<{
     (e:'pinnedProject',projectId:number):void
+    (e:'deleteProject',projectId:number):void
     (e:'editProject',project:ProjectType):void
     (e:'viewProjectDetail',projectId:number):void
     (e:'getProject',page:number,query:string):Promise<void>
@@ -44,17 +45,16 @@ const search = myDebounce(async function () {
         </div>
     </div>
     <div class="row">
-        <table class="table table-bordered table-hover table-striped">
+        <table class="table table-bordered table-hover table-striped w-100">
             <thead>
                 <tr style="font-weight: bold;">
                 <td width="5%">ID</td>
-                <td width="30%">Title</td>
-
+                <td width="20%">Title</td>
                 <td  width="20%">Completion</td>
-                <td width="5%">Edit</td>
-                <td  width="10%">Pinned</td>
+                <td width="20%">Action</td>
+                <td  width="15%">Pinned</td>
 
-                <td  width="15%">View</td>
+                <td  width="10%">View</td>
 
             </tr>
             </thead>
@@ -77,7 +77,8 @@ const search = myDebounce(async function () {
 
                 </td>
                 <td>
-                    <button @click="emit('editProject',project)" type="button" class="btn btn-outline-primary">Edit</button>
+                    <button @click="emit('editProject',project)" type="button" class="btn btn-outline-primary btn-sm">Edit</button>
+                    <button @click="emit('deleteProject',project.id)" type="button" class="btn btn-outline-danger mx-3 btn-sm">Delete</button>
                 </td>
 
                 <td>
@@ -86,7 +87,7 @@ const search = myDebounce(async function () {
 
                 <td>
                     <RouterLink
-                        class="btn btn-warning"
+                        class="btn btn-warning btn-sm"
                         :to="'/kaban?query=' + project.slug"
                     >View <i class="bi bi-arrow-right"></i></RouterLink>
                 </td>

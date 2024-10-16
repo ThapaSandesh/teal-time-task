@@ -9,7 +9,9 @@ import { projectStore } from './store/projectStore';
 import { ProjectInputType } from './actions/CreateProject';
 import ProjectTable from './component/ProjectTable.vue';
 import { usePinnedProject } from './actions/PinnedProject';
+import { useDeleteProject } from './actions/DeleteProject';
 const{getProjects,projectData,loading} = useGetProjects();
+
 async function showListOfProjects(){
     await getProjects();
 }
@@ -24,6 +26,13 @@ async function pinnedProjectOnDashboard(projectId:number)
 {
     await pinnedProject(projectId);
     router.push('/admin');
+}
+const {deleteProject} = useDeleteProject()
+
+async function deleteSingleProject(projectId: number) {
+    await deleteProject(projectId);
+    // Refetch the updated list of projects after deletion
+    await getProjects();
 }
 
 onMounted(async () => {
@@ -49,6 +58,7 @@ onMounted(async () => {
                         @getProject="getProjects"
                         :projects="projectData"
                         @pinnedProject="pinnedProjectOnDashboard"
+                        @deleteProject="deleteSingleProject"
                         >
                         <template #pagination>
                                 <Bootstrap5Pagination

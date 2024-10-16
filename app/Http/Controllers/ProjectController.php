@@ -91,6 +91,21 @@ class ProjectController extends Controller
 
         return response(['message' => 'project updated'], 200);
     }
+
+    public function delete(Request $request)
+    {
+        $projectId = $request->input('projectId'); // Get projectId from request body
+
+        $project = Project::find($projectId);  // Assuming you have a Project model
+        if ($project) {
+            $project->delete();  // Delete the project
+            return response()->json(['message' => 'Project deleted successfully.']);
+        } else {
+            return response()->json(['message' => 'Project not found.'], 404);
+        }
+
+    }
+
     public function pinnedProject(Request $request)
     {
 
